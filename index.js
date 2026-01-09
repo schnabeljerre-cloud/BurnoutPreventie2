@@ -13,9 +13,9 @@ function calculateBRS(e, s, w, sl, em) {
 }
 
 function getMessage(brs) {
-  if (brs <= 5) return "🟢 Je doet het goed. Neem pauzes en zorg voor jezelf."
-  if (brs <= 7) return "🟠 Je staat onder druk. Werk rustiger en neem herstelmomenten."
-  return "🔴 Je staat zwaar onder druk. Forceer niets en praat met iemand."
+  if (brs <= 5) return "🟢 Je doet het goed. Neem pauzes."
+  if (brs <= 7) return "🟠 Je staat onder druk. Werk rustiger."
+  return "🔴 Je staat zwaar onder druk. Neem rust en praat met iemand."
 }
 
 app.post("/whatsapp", async (req, res) => {
@@ -53,4 +53,8 @@ app.post("/whatsapp", async (req, res) => {
   return res.send(`<Response><Message>Dankjewel 🙏 Je score is ${brs}\n\n${getMessage(brs)}</Message></Response>`)
 })
 
-export default app
+app.get("/", (req, res) => res.send("MindGuard AI Railway Live 🚀"))
+
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => console.log("Server live on", PORT))
+
