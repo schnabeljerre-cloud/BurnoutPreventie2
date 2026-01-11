@@ -13,6 +13,5 @@ app.get("/", (req, res) => {
 app.post("/whatsapp", (req, res) => {
   res.send(`<Response><Message>MindGuard AI actief 👋</Message></Response>`);
 });
-
 export default app;
 
