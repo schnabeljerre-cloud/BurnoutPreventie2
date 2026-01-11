@@ -11,7 +11,6 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => {
   res.send("MindGuard AI Server Live 🚀");
 });
-
 // WhatsApp webhook
 app.post("/whatsapp", (req, res) => {
   const msg = req.body.Body || "";
@@ -23,5 +22,4 @@ app.post("/whatsapp", (req, res) => {
 </Response>
 `);
 });
-
 export default app;
