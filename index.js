@@ -1,27 +1,30 @@
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-import express from "express";
-import bodyParser from "body-parser";
+const express = require("express");
+const bodyParser = require("body-parser");
 
 const app = express();
 
-// Twilio compatibele body parsing
+// Twilio compatible body parsing
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Root check
+// Root test
 app.get("/", (req, res) => {
   res.send("MindGuard AI Server Live 🚀");
 });
+
 // WhatsApp webhook
 app.post("/whatsapp", (req, res) => {
   const msg = req.body.Body || "";
-  console.log("WhatsApp message:", msg);
 
-  return res.set("Content-Type", "text/xml").send(`
+  console.log("WhatsApp:", msg);
+
+  res.set("Content-Type", "text/xml");
+  res.status(200).send(`
 <Response>
   <Message>MindGuard AI actief 👋</Message>
 </Response>
 `);
 });
-export default app;
+
+// Vercel export
+module.exports = app;
