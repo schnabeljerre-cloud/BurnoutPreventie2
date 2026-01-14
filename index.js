@@ -1,19 +1,27 @@
-module.exports = async (req, res) => {
-  if (req.method === "GET") {
-    return res.status(200).send("MindGuard AI Server Live 🚀");
-  }
+import express from "express";
+import bodyParser from "body-parser";
 
-  if (req.method === "POST") {
-    const msg = req.body?.Body || "";
+const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-    console.log("WhatsApp:", msg);
+app.get("/", (req, res) => {
+  res.send("MindGuard AI Live 🚀");
+});
 
-    return res.status(200).setHeader("Content-Type", "text/xml").send(`
+app.post("/whatsapp", (req, res) => {
+  console.log("WhatsApp:", req.body.Body);
+
+  res.set("Content-Type", "text/xml");
+  res.send(`
 <Response>
   <Message>MindGuard AI actief 👋</Message>
 </Response>
 `);
-  }
+});
 
-  return res.status(405).send("Method not allowed");
-};
+app.listen(process.env.PORT || 3000, () =>
+  console.log("Server running")
+);
+
+
